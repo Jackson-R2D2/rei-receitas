@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <h1 class="title">Receitas curtidas</h1>
+    <div class="container-vertical">
+        <div class="border">
+            {% for revenue_like in revenues %}
+                <a href="{% url 'recipe-page' revenue_like.id %}" class="recipe_search" id="favorite-recipe">
+                    <img src="{{ revenue_like.revenue_image.url }}" alt="{{ revenue_like.name_revene }}">
+                    <div class="recipe-information">
+                        <span class="information-name-revenue">{{ revenue_like.name_revenue }}</span>
+                        <span class="information-name-host">{{ revenue_like.host.name }}</span>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Delete" name="{{ revenue_like.id }}">
+                        </form>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock content %}

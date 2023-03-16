@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form method="post" action="">
+    {% csrf_token %}
+
+    <p>Deseja excluir a mensagem?</p>
+    <input type="submit" value="Delete" name="delete">
+    <input type="submit" value="Cancel" name="cancel">
+</form>
+
+{% endblock %}

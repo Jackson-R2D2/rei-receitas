@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+
+{% if registration_sistem == 'register' %}
+
+    <div class="register-user">
+        <form method="post" action="" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <label>Email</label>
+                {{ form.email }}
+            </div>
+            <div>
+                <label>Senha</label>
+                {{ form.password }}
+            </div>
+            <div>
+                <label>Confirmar Senha</label>
+                {{ form.confirm_password }}
+            </div>
+            <div>
+                <label>Nome</label>
+                {{ form.name }}
+            </div>
+            <div id="container-photo-user">
+                <label for="id_photo_user">Selecione uma foto para perfil</label>
+                {{ form.photo_user }}
+            </div>
+            <input type="submit" value="Register" class="submit submit-register">
+            <a href="{% url 'login-user' %}">Faça o login</a>
+        </form>
+        <div class="message-error">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+
+{% else %}
+
+    <div class="register-user" id="login">
+        <form method="post" action="" autocomplete="off" class="form-login">
+            {% csrf_token %}
+            <div>
+                <label for="">Email</label>
+                <input type="email" name="email" placeholder="Insira um email">
+            </div>
+            <div>
+                <label for="">Senha</label>
+                <input type="password" name="password" placeholder="Insira uma senha">
+            </div>
+            <input type="submit" value="Login" class="submit submit-register">
+            <p>Ainda não se cadastrou?</p>
+            <a href="{% url 'register-user' %}">Cadastra-se aqui</a>
+        </form>
+        <div class="message-error">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <h1 class="title">Receitas enviadas</h1>
+    <div class="container-vertical">
+        <div class="border">
+            {% for revenue in revenues %}
+                <a href="{% url 'recipe-page' revenue.id %}" class="recipe_search">
+                    <img src="{{ revenue.revenue_image.url }}" alt="">
+                    <div class="recipe-information">
+                        <span class="information-name-revenue">{{ revenue.name_revenue }}</span>
+                        <span class="information-name-host">{{ revenue.host.name }}</span>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container-link">
+        <span>Clique em baixo para ver as receitas favoritas</span>
+        <a href="{% url 'favorites-recipes' %}">Receitas Favoritas</a>
+    </div>
+{% endblock content %}

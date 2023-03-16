@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <header class="header">
+        <div id="header-main">
+            <a href="{% url 'home' %}" class="logo"><img src="/static/images/crown.png" class="crown"><h1>Rei Receitas</h1></a>
+            <form method="get" action="{% url 'filtered-recipes' %}" class="form-search">
+                <input type="text" name="search" id="search01" placeholder="Pesquise uma Receita" class="search">
+            </form>
+            <nav>
+                <a href="{% url 'register-revenue' %}" class="recipe-register" ><img src="/static/images/book.png" class="book"><span id="span02">Registrar receita</span></a>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'logout-user' %}" class="login-sistem" id="logout"><img src="/static/images/emergency-exit.png" class="exit"><span class="span-login">Sair</span></a>
+                {% else %}
+                    <a href="{% url 'login-user' %}" class="login-sistem" id="login"><span class="span-login">Login</span></a>
+                {% endif %}
+            </nav>
+            {% if request.user.photo_user %}
+                <a href="{% url 'user-page' %}"><img src="{{ request.user.photo_user.url }}" alt="photo-user" class="photo-user"></a>
+            {% endif %}
+        </div>
+    </header>
+    <div class="separate">
+
+    </div>
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+    <footer class="footer">
+
+        <div class="container-footer">
+            <div class="column-footer" id="column-01" style="margin-left:80px;">
+                <h3>Categorias de Receitas</h3>
+                <ul>
+                    <li>Lanches rápidos</li>
+                    <li>Sopas</li>
+                    <li>Fitness</li>
+                    <li>Sobremessas</li>
+                    <li>Salgados</li>
+                    <li>Frutas do mar</li>
+                    <li>Bolos</li>
+                </ul>
+            </div>
+            <div class="column-footer" id="column-02" style="margin-left:130px;">
+                <h3>Sobre</h3>
+                <ul>
+                    <li>Sobre nós</li>
+                    <li>Termos de uso</li>
+                    <li>Contatos</li>
+                </ul>
+            </div>
+            <div class="column-footer" id="column-02" style="margin-left:130px;">
+                <h3>Redes sociais</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Instagram</li>
+                    <li>Twitter</li>
+                </ul>
+            </div>
+            <div class="column-footer" id=column-03 style="margin-left: 220px;">
+                <a href="{% url 'home' %}"><img src="/static/images/crown.png" class="crown"><h1>Rei Receitas</h1></a>
+            </div>
+        </div>
+
+    </footer>
+</body>
+</html>

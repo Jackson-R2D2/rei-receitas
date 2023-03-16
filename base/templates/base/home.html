@@ -1,0 +1,92 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-main" id="container01-main">
+    <div class="main-recipe">
+        <a href="{% url 'recipe-page' recipes.main_recipe.id %}">
+            {% if recipes.main_recipe.revenue_image %}
+                <img src="{{ recipes.main_recipe.revenue_image.url }}" alt="{{ recipes.main_recipe.name_reveneue }}" class="image-main">
+            {% endif %}
+        </a>
+    </div>
+    <div class="recipes-right">
+        <div  class="recipe-right-container" >
+            <a href="{% url 'recipe-page' recipes.recipe_right_top.id %}" class="recipe-right" id="recipe-right01">
+                {% if recipes.recipe_right_top.revenue_image %}
+                    <img src="{{ recipes.recipe_right_top.revenue_image.url }}" alt="{{ recipes.recipe_right_top.name_revenue }}">
+                {% endif %}
+                <div class="recipe-informations">
+                    <span class="name-recipe">{{ recipes.recipe_right_top.name_revenue }}</span>
+                    <span>{{ recipes.recipe_right_top.host.name }}</span>
+                    <span>{{ recipes.recipe_right_top.total_likes }} LIKES</span>
+                </div>
+            </a>
+        </div>
+        <div class="recipe-right-container" >
+            <a href="{% url 'recipe-page' recipes.recipe_right_down.id %}" class="recipe-right" id="recipe-right02">
+                {% if recipes.recipe_right_down.revenue_image %}
+                    <img src="{{ recipes.recipe_right_down.revenue_image.url }}" alt="{{ recipes.recipe_right_down.name_revenue }}">
+                {% endif %}
+                <div class="recipe-informations">
+                    <span class="name-recipe">{{ recipes.recipe_right_down.name_revenue }}</span>
+                    <span>{{ recipes.recipe_right_down.host.name }}</span>
+                    <span>{{ recipes.recipe_right_down.total_likes }} LIKES</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="container-strip">
+    <span class="strip">OUTRAS RECEITAS</span>
+</div>
+<div class="container-recipes">
+    <a href="{% url 'recipe-page' recipes.bolo_fuba.id %}" class="recipe-horizontal">
+        <img src="{{ recipes.bolo_fuba.revenue_image.url }}" alt="">
+        <p>
+            <span class="name-recipe">{{ recipes.bolo_fuba.name_revenue }}</span>
+            criado por 
+            <span class="author">{{ recipes.bolo_fuba.host.name }}</span>
+            <span class="likes">{{ recipes.bolo_fuba.total_likes }} LIKES</span>
+        </p>
+    </a>
+    <a href="{% url 'recipe-page' recipes.bolo.id %}" class="recipe-horizontal">
+        <img src="{{ recipes.bolo.revenue_image.url }}" alt="">
+        <p>
+            <span class="name-recipe">{{ recipes.bolo.name_revenue }}</span>
+            criado por 
+            <span class="author">{{ recipes.bolo.host.name }}</span>
+            <span class="likes">{{ recipes.bolo.total_likes }} LIKES</span>
+        </p>
+    </a>
+    <a href="{% url 'recipe-page' recipes.poke.id %}" class="recipe-horizontal">
+        <img src="{{ recipes.poke.revenue_image.url }}" alt="">
+        <p>
+            <span class="name-recipe">{{ recipes.poke.name_revenue }}</span>
+            criado por 
+            <span class="author">{{ recipes.poke.host.name }}</span>
+            <span class="likes">{{ recipes.poke.total_likes }} LIKES</span>
+        </p>
+    </a>
+</div>
+<div class="container-strip">
+    <span class="strip">Usuários com mais destaque</span>
+</div>
+<div class="container-featured-users">
+    <div class="container-title">
+        <h3>DESTAQUES</h3>
+    </div>
+    <div class="featured-users">
+        {% for user in featured_users %}
+
+            <a href="{% url 'user'  user.id %}" class="user">
+                <img src="{{ user.photo_user.url }}" alt="{{ user.name }}">
+                <span>{{ user.name }}</span>
+            </a>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

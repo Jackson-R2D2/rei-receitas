@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="register-recipe">
+    <form method="post" action enctype="multipart/form-data" class="teste" autocomplete="off">
+        {% csrf_token %}
+        <div>
+            <label>Nome da Receita</label>
+            {{ form.name_revenue }}
+        </div>
+        <div>
+            <label>Ingredientes</label>
+            {{ form.ingredients}}
+        </div>
+        <div>
+            <label>Preparação da receita</label>
+            {{ form.preparation_mode }}
+        </div>
+        <div>
+            <label>Tópico</label>
+            {{ form.topic }}
+        </div>
+        <div id="container-revenue-image">
+            <label for="id_revenue_image">Imagem</label>
+            {{ form.revenue_image }}
+        </div>
+        <input type="submit" value="Register" class="submit" id="submit-register-recipe">
+    </form>
+</div>
+
+{% endblock content %}

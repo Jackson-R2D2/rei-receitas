@@ -1,0 +1,39 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+<div class="container-user-informations">
+    <div class="user">
+        <img src="{{ user.photo_user.url }}" alt="user">
+        <h1>{{ user.name }}</h1>
+        <h2>Receitas enviadas</h2>
+    </div>
+    <div class="container-recipes" id="recipes-page-user">
+        {% for recipe in recipes %}
+            <a href="{% url 'recipe-page' recipe.id %}" class="recipe-horizontal" id="recipe-page-user">
+                <img src="{{ recipe.revenue_image.url }}" alt="Receita">
+                <p>
+                    <span class="name-recipe">{{ recipe.name_revenue }}</span>
+                    criado por 
+                    <span class="author">{{ recipe.host.name }}</span>
+                    <span class="likes">{{ recipe.total_likes }} LIKES</span>
+                </p>
+            </a>
+        {% endfor %}
+    </div>
+
+    {% if recipes.has_previous %}
+
+    <a href="?page={{ recipes.previous_page_number }}">Previous</a>
+
+    {% endif %}
+
+    {% if recipes.has_next %}
+
+    <a href="?page={{ recipes.next_page_number }}">Next</a>
+
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1 class="title" id="title-filtered-page">{{ total_recipes }} Receitas encontradas no total</h1>
+
+<div class="container-vertical" id="filtered-recipes-vertical">
+    {% if len_recipes > 0 %}
+    
+        <div class="container-favorite-recipes">
+            <div class="border">
+                {% for recipe in recipes_local %}
+                    <a href="{% url 'recipe-page' recipe.id %}" class="recipe_search">
+                        <img src="{{ recipe.revenue_image.url }}" alt="{{ recipe.name_revenue }}" loading="eager">
+                        <div class="recipe-information">
+                            <span class="information-name-revenue">{{ recipe.name_revenue }}</span>
+                            <span class="information-name-host">{{ recipe.host.name }}</span>
+                            <span>{{ recipe.total_likes }} LIKES</span>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+    
+        <h1>Não encontrei a receita</h1>
+    
+    {% endif %}
+</div>
+    
+<div class="container-pages">
+    {% if page_obj.has_previous %}
+    
+        <a href="?page=1">&lt;&lt;</a>
+        <a href="?page={{ page_obj.previous_page_number }}" id="previous" class="page">Previous</a>
+    
+    {% endif %}
+    
+    {% if page_obj.has_next %}
+    
+        <a href="?page={{ page_obj.next_page_number }}" id="next" class="page">Next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}"> >> </a>
+    
+    {% endif %}
+</div>
+
+{% endblock content %}

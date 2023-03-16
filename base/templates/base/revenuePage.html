@@ -1,0 +1,64 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="home">
+        <div class="recipe">
+            <div class="container" id = "container01">
+                <h1 class="recipe-title">{{ revenue.name_revenue }}</h1>
+                {% if revenue.revenue_image %}
+                    <img src="{{ revenue.revenue_image.url }}" alt="{{ revenue.revenue_name }}" class="recipe-image">
+                {% endif %}
+                <div class="informations-revenue">
+                    <div class="like"><span>Like: {{ revenue.total_likes }}</span></div>
+                    <div class="informations-author">
+                        <img src="{{ revenue.host.photo_user.url }}" alt="">
+                        <span>{{ revenue.host.name }}</span>
+                    </div>
+                </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="{{ like_buttom }}" name="button_feedback">
+                </form>
+            </div>
+            <div class="container" id = "container02">
+                <h2>Ingredientes</h2>
+                <ul class="ingredients">
+                    {% for ingredient in revenue.yield_ingredients %}
+                        <li>{{ ingredient }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="container" id = "container03">
+                <h2>Modo de preparo</h2>
+                <p>{{ revenue.preparation_mode }}</p>
+            </div>
+            <div class="container" id = "container04">
+                <h2>Comentários</h2>
+                <div class="form-message">
+                    <form method="post" action="" class="form" autocomplete="off">
+                        {% csrf_token %}
+                        <img src="{{ request.user.photo_user.url }}" alt="user-photo" class="photo-user">
+                        <input type="text" name="comment" placeholder="Deixe o seu comentário...">
+                    </form>
+                </div>
+                {% for message in revenue.message_set.all %}
+                    <div class="card-message">
+                        <div id="card-message01">
+                            <img src="{{ message.host.photo_user.url }}" alt="Foto do usuário" class="photo-user">
+                        </div>
+                        <div id="card-message02">
+                            <small>@{{ message.host.name }} -- {{ message.created }}</small>
+                            {% if request.user == message.host %}
+                                <a href="{% url 'delete-message' message.id %}">Delete</a>
+                            {% endif %}
+                            <div class=text-message>
+                                <p>{{ message.textMessage }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+</div>
+
+{% endblock content %}
