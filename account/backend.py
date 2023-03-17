@@ -4,7 +4,16 @@ from django.contrib.auth import get_user_model
 
 UserModel = get_user_model()
 
-class CustomBackend(ModelBackend):
+
+class BlockUserMixin:
+    def block_user(self, user, request):
+        if user.number_of_attempts == 0 and user.is_active:
+            user.is_active = False 
+            user.save()
+            messages.error(request, 'O usuário foi bloqueado por inúmeras tentativas para realizar o login')
+
+
+class CustomBackend(ModelBackend, BlockUserMixin):
     def authenticate(self, request, email=None, password=None, **extra_fields):
         if email == None or password == None:
             return 
@@ -20,10 +29,3 @@ class CustomBackend(ModelBackend):
             user.number_of_attempts -= 1
             user.save()
             return
-
-    
-    def block_user(self, user, request):
-        if user.number_of_attempts == 0 and user.is_active:
-            user.is_active = False 
-            user.save()
-            messages.error(request, 'O usuário foi bloqueado por inúmeras tentativas para realizar o login')
