@@ -204,15 +204,24 @@ class DeleteMessage(View):
         return redirect('recipe-page', message.revenue.id)
 
 
-class User(View):
+class User(ListView):
     template_name = 'base/user.html'
+    model = Revenue
+    context_object_name = 'recipes'
+    pk_url_kwarg = 'pk'
+    paginate_by = 8
 
-    def get(self, request, *args, **kwargs):
-        user = get_user_model().objects.get(id = kwargs['pk'])
-        p = Paginator(Revenue.objects.annotate(max_date=Max('like')).filter(host = user).order_by('max_date'), 8)
-        page = request.GET.get('page')
-        recipes = p.get_page(page)
-        return render(request, self.template_name, {'user':user, 'recipes':recipes})
+
+    def get_queryset(self):
+        self.user = get_user_model().objects.get(id = self.kwargs.get('pk'))
+        self.recipes = Revenue.objects.annotate(max_date=Max('like')).filter(host = self.user).order_by('-max_date')
+        return self.recipes
+
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.user
+        return context
 
 
 def loginUser(request):
