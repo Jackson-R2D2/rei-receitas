@@ -23,15 +23,15 @@
         {% endfor %}
     </div>
 
-    {% if recipes.has_previous %}
+    {% if page_obj.has_previous %}
 
-    <a href="?page={{ recipes.previous_page_number }}">Previous</a>
+    <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
 
     {% endif %}
 
-    {% if recipes.has_next %}
+    {% if page_obj.has_next %}
 
-    <a href="?page={{ recipes.next_page_number }}">Next</a>
+    <a href="?page={{ page_obj.next_page_number }}">Next</a>
 
     {% endif %}
 </div>
