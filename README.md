@@ -1,8 +1,6 @@
 <h1 color='blue'>Rei Receitas</h1>
 <img src="https://img.shields.io/badge/license-MIT-brightgreen">
 
-<h4 align="center">:construction: Projeto em construção :construction:</h4>
-
 <div><img src="https://user-images.githubusercontent.com/127449144/225756930-3f9d42ab-016b-4861-b24c-2d2a3f9880c5.png" width="450px" height="300px">
 <img src="https://user-images.githubusercontent.com/127449144/225761673-883aec76-8112-4666-a628-97be3b6ad6b5.png" width="350px" height="300px">
 <img src="https://user-images.githubusercontent.com/127449144/225761677-9d0517d5-74cd-4e4b-af40-8e7c56ab6d72.png" width="450px" height="300px"></div>
